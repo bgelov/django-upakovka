@@ -1,8 +1,5 @@
 from datetime import datetime, timedelta
 
-import numpy as np
-import pandas as pd
-
 # https://docs.djangoproject.com/en/4.2/topics/auth/default/
 from django.contrib.auth.decorators import login_required
 
@@ -12,8 +9,12 @@ from django.utils import timezone
 
 from warehouse.models import Product, Category, IncomingProduct, OrderProduct
 
+import numpy as np
+import pandas as pd
+
 # For pandas report export
 from io import BytesIO
+
 from django.http import HttpResponse
 
 

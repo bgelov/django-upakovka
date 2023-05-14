@@ -16,7 +16,7 @@ jobs:
         python-version: [3.9]
     
     environment: Test
-    
+
     services:
       postgres:
         image: postgres:latest

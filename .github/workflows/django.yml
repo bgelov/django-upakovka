@@ -25,6 +25,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Get SECRET_KEY env from secrets
+      env: |
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
     - name: Create .env file
       run: |
         echo "${{ secrets.ENV_FILE }}" > .env

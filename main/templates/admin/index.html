@@ -1,0 +1,68 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+  {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+    <div>
+        <p>Раздел <strong>Заказы</strong> следует использовать для списания продукции.</p>
+        <p>Раздел <strong>Приход</strong> используется для учёта прихода продукции.</p>
+        <p>В разделе <strong>Продукция</strong> просмотр существующей и добавление новой продукции</p>
+        <p>В разделе <strong>Категории</strong> просмотр существующих и добавление новых категорий продукции</p>
+    </div>
+    <br>
+    <h1>Отчёты</h1>
+    <ul>
+        <li><a href="../reports/inventory/" target="_blank">Остатки продукции</a></li>
+        <li><a href="../reports/pallet/" target="_blank">Приход, расход, разница и количество паллет по датам</a></li>
+        <li><a href="../reports/pallet/" target="_blank">Хранение продукции по количеству паллет</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% translate 'Recent actions' %}</h2>
+        <h3>{% translate 'My actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% translate 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% translate 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+
+    <svg viewBox="0 0 300 150"><g featurekey="symbolFeature-0" transform="matrix(2,0,0,2,100,-4)" fill="#c9c9c9"><g xmlns="http://www.w3.org/2000/svg"><path d="M61.955,52.7l-5-16A1,1,0,0,0,56,36H55V13c0-.013-.007-.024-.008-.038a.988.988,0,0,0-.063-.334l-4-10A1,1,0,0,0,50,2H14a1,1,0,0,0-.929.628l-4,10a.988.988,0,0,0-.063.334c0,.014-.008.025-.008.038V36H8a1,1,0,0,0-.955.7l-5,16a1.018,1.018,0,0,0-.007.111A.913.913,0,0,0,2,53v8a1,1,0,0,0,1,1H9a1,1,0,0,0,1-1V58H28v3a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V58H54v3a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V53a.913.913,0,0,0-.038-.187A1.018,1.018,0,0,0,61.955,52.7ZM35,56H4V54H60v2H35ZM9,44H6.86l.625-2H9Zm0,2v2H5.61l.625-2Zm48.14-2H55V42h1.515ZM55,50h4.015l.625,2H55Zm0-2V46h2.765l.625,2Zm-2,4H33V34H53Zm0-20H33V14H53ZM31,32H11V14H31ZM11,34H31V52H11Zm44.265,4,.625,2H55V38ZM33,12V9H51.323l1.2,3ZM50.523,7H33V4H49.323ZM14.677,4H31V7H13.477Zm-2,5H31v3H11.477ZM9,38v2H8.11l.625-2ZM5,49.953V50H9v2H4.36ZM8,60H4V58H8Zm26,0H30V58h4Zm26,0H56V58h4Z"></path><path d="M14,23h6a1,1,0,0,0,1-1V17a1,1,0,0,0-1-1H14a1,1,0,0,0-1,1v5A1,1,0,0,0,14,23Zm1-5h4v3H15Z"></path><path d="M36,23h6a1,1,0,0,0,1-1V17a1,1,0,0,0-1-1H36a1,1,0,0,0-1,1v5A1,1,0,0,0,36,23Zm1-5h4v3H37Z"></path><path d="M20,36H14a1,1,0,0,0-1,1v5a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V37A1,1,0,0,0,20,36Zm-1,5H15V38h4Z"></path><path d="M36,43h6a1,1,0,0,0,1-1V37a1,1,0,0,0-1-1H36a1,1,0,0,0-1,1v5A1,1,0,0,0,36,43Zm1-5h4v3H37Z"></path><rect x="25" y="25" width="4" height="2"></rect><rect x="25" y="28" width="4" height="2"></rect><rect x="25" y="45" width="4" height="2"></rect><rect x="25" y="48" width="4" height="2"></rect><rect x="47" y="45" width="4" height="2"></rect><rect x="47" y="48" width="4" height="2"></rect><rect x="47" y="25" width="4" height="2"></rect><rect x="47" y="28" width="4" height="2"></rect></g></g><g id="SvgjsG1229" featurekey="nameFeature-0" transform="matrix(1.1468725453284554,0,0,1.1468725453284554,-4.963436409538338,145.77090920784013)" fill="#000000"></g></svg>
+
+</div>
+{% endblock %}
+
+

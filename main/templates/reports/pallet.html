@@ -1,0 +1,30 @@
+{% extends 'reports/report_base.html' %}
+
+{% block title %} Отчёт по паллетам {% endblock title %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'reports:pallet_report' %}">
+    {% csrf_token %}
+    <label for="filter_date_start">с:</label>
+    <input type="date" name="filter_date_start" id="filter_date_start">
+    <label for="filter_date_end">по:</label>
+    <input type="date" name="filter_date_end" id="filter_date_end">
+    <button type="submit">Показать</button>
+</form>
+<br>
+<p><strong>Отчёт:</strong> {{ report_name }}</p>
+<p><strong>Дата начала:</strong> {{ filter_date_start }}. <strong>Конечная дата:</strong> {{ filter_date_end }}.</p>
+<br>
+{% if products_count > 0 %}
+    {{ df | safe }}
+    <a href="../export_report_pallet/">Export pallet report</a>
+{% elif products_count == 0 %}
+    <p>Набор данных пустой. Количество продукции равно 0.</p>
+{% else %}
+    <p>Произошла ошибка. Невозможно получить количество продукции.</p>
+{% endif %}
+
+
+{% endblock content %}
+

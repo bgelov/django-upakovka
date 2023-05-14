@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% endblock css %}
+
+{% block title %}Управление хранением{% endblock title %}
+
+{% block content %}
+    <div class="mb-5">
+      {% if user.is_authenticated %}
+          <p class="fs-5 col-md-8">Вы вошли в систему. Привет, {{ user.username|default:'Гость' }}</p>
+          <a href="{% url 'admin:index' %}" class="btn btn-primary btn-lg px-4">Начать работу</a>
+          <a href="{% url 'logout' %}" class="btn btn-primary btn-lg px-4">Logout</a>
+      {% else %}
+          <p class="fs-5 col-md-8">Для начала работы необходимо войти в систему.</p>
+          <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4">Login</a>
+      {% endif %}
+    </div>
+{% endblock content %}

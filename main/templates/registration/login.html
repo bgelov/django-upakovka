@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/signin.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+<h1>Вы уже залогинены как {{ user.username }}</h1>
+<br>
+      <p>Нажмите <a href="{% url 'logout' %}">сюда</a> для выхода из системы.</p>
+    {% else %}
+        <main class="form-signin w-100 m-auto">
+            <form class="form-signin text-nowrap" method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            </form>
+        </main>
+    {% endif %}
+
+
+    <!---div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div--->
+
+
+{% endblock %}

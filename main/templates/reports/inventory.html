@@ -1,0 +1,13 @@
+{% extends 'reports/report_base.html' %}
+
+
+{% block title %} Остатки продукции на {{ filter_date }} {% endblock title %}
+
+{% block content %}
+
+    {{ filter_date }}
+
+    {{ df|safe }}
+
+
+{% endblock content %}

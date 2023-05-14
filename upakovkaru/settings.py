@@ -155,3 +155,6 @@ IMPORT_EXPORT_EXPORT_PERMISSION_CODE = 'view'
 
 # Should robots.txt allow everything to be crawled?
 ALLOW_ROBOTS = env('ALLOW_ROBOTS')
+
+# Django deploy recommendations
+SESSION_COOKIE_SECURE = True

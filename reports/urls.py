@@ -1,12 +1,16 @@
 from django.urls import path
 
-from .views import inventory_report, pallet_report, products_report, export_report_pallet
+from .views import index_report, inventory_report, pallet_report, pallet_only_report, export_report_inventory, export_report_pallet, \
+    export_report_pallet_only
 
 app_name = 'reports'
 urlpatterns = [
-    path('inventory/', inventory_report),
+    path('', index_report, name='index_report'),
+    path('inventory/', inventory_report, name='inventory_report'),
     path('pallet/', pallet_report, name='pallet_report'),
-    path('export_report_pallet/', export_report_pallet),
-    path('products/', products_report),
+    path('pallet-only/', pallet_only_report, name='pallet_only_report'),
+    path('export-report-inventory/', export_report_inventory, name='export_report_inventory'),
+    path('export-report-pallet/', export_report_pallet, name='export_report_pallet'),
+    path('export-report-pallet-only/', export_report_pallet_only, name='export_report_pallet_only'),
 ]
 

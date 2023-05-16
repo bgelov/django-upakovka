@@ -1,6 +1,6 @@
 {% extends 'reports/report_base.html' %}
 
-{% block title %} Отчёт по паллетам {% endblock title %}
+{% block title %} {{ report_name }} {% endblock title %}
 
 {% block content %}
 
@@ -18,13 +18,11 @@
 <br>
 {% if products_count > 0 %}
     {{ df | safe }}
-    <a href="../export_report_pallet/">Export pallet report</a>
+    <a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a>
 {% elif products_count == 0 %}
     <p>Набор данных пустой. Количество продукции равно 0.</p>
 {% else %}
     <p>Произошла ошибка. Невозможно получить количество продукции.</p>
 {% endif %}
 
-
 {% endblock content %}
-

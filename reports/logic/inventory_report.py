@@ -24,6 +24,7 @@ def inventory_report_result(products, filter_date):
         else:
             incoming_products.fillna(0, inplace=True)
             result = result.merge(incoming_products, left_on='id', right_on='product_id', how='left')
+            result.drop('product_id', axis=1, inplace=True)
 
         order_products = pd.DataFrame(get_order_products_sum(filter_date))
         if len(order_products.index) == 0:
@@ -31,10 +32,10 @@ def inventory_report_result(products, filter_date):
         else:
             order_products.fillna(0, inplace=True)
             result = result.merge(order_products, left_on='id', right_on='product_id', how='left')
+            result.drop('product_id', axis=1, inplace=True)
 
         result['total_now_' + str(filter_date_col)] = (result['total_incoming'] - result['total_order']).astype('Int64')
 
         result.fillna(0, inplace=True)
-        result.drop('product_id', axis=1, inplace=True)
 
     return result

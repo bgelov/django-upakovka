@@ -1,13 +1,21 @@
 {% extends 'reports/report_base.html' %}
 
 
-{% block title %} Остатки продукции на {{ filter_date }} {% endblock title %}
+{% block title %} {{ report_name }} на {{ filter_date }} {% endblock title %}
 
 {% block content %}
 
-    {{ filter_date }}
-
-    {{ df|safe }}
-
+    <p><strong>Отчёт:</strong> {{ report_name }}</p>
+    <p><strong>Дата:</strong> {{ filter_date }}</p>
+    <br>
+    {% if products_count > 0 %}
+<p><a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a></p>
+        {{ df | safe }}
+<p><a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a></p>
+    {% elif products_count == 0 %}
+        <p>Набор данных пустой. Количество продукции равно 0.</p>
+    {% else %}
+        <p>Произошла ошибка. Невозможно получить количество продукции.</p>
+    {% endif %}
 
 {% endblock content %}

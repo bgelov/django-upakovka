@@ -44,11 +44,15 @@ def inventory_report(request, export=False):
     products = products_and_category()
     result = inventory_report_result(products, filter_date)
 
+    if export:
+        return export_to_excel(result, 'inventory_report_export')
+
     context = {
         'report_name': report_name,
         'df': result.to_html(),
         'products_count': products.count(),
-        'date_end': filter_date,
+        'filter_date': filter_date,
+        'export_link': 'export-report-inventory',
     }
     return render(request, template, context)
 

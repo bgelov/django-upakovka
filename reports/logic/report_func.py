@@ -72,7 +72,7 @@ def export_to_excel(result, export_file_name='export'):
     with BytesIO() as b:
         with pd.ExcelWriter(b) as writer:
             result.to_excel(writer, sheet_name="Data", index=False)
-        filename = f"{export_file_name}.xlsx"
+        filename = f"{export_file_name}_{timezone.now().strftime('%d_%m_%Y-%H_%M_%S')}.xlsx"
         xlsx_output = HttpResponse(
             b.getvalue(),
             content_type='application/vnd.ms-excel'

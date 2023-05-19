@@ -17,8 +17,9 @@
 <p><strong>Дата начала:</strong> {{ filter_date_start }}. <strong>Конечная дата:</strong> {{ filter_date_end }}.</p>
 <br>
 {% if products_count > 0 %}
+<p><a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a></p>
     {{ df | safe }}
-    <a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a>
+<p><a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a></p>
 {% elif products_count == 0 %}
     <p>Набор данных пустой. Количество продукции равно 0.</p>
 {% else %}

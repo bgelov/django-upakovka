@@ -49,7 +49,7 @@ def inventory_report(request, export=False):
 
     context = {
         'report_name': report_name,
-        'df': result.to_html(),
+        'df': result.to_html(index=False),
         'products_count': products.count(),
         'filter_date': filter_date,
         'export_link': 'export-report-inventory',
@@ -81,7 +81,7 @@ def pallet_report(request, export=False):
 
     context = {
         'report_name': report_name,
-        'df': result.to_html(),
+        'df': result.to_html(index=False),
         'products_count': products.count(),
         'filter_date_start': filter_date_start,
         'filter_date_end': filter_date_end,
@@ -115,7 +115,7 @@ def pallet_only_report(request, export=False):
 
     context = {
         'report_name': report_name,
-        'df': result.to_html(),
+        'df': result.to_html(index=False),
         'products_count': products.count(),
         'filter_date_start': filter_date_start,
         'filter_date_end': filter_date_end,

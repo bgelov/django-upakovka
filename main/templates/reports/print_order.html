@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ order_info.order_name }} от {{ order_info.order_date }}</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding: 7px;
+        }
+        * { color: black; background: white; }
+
+        @media print {
+            html, body{
+                height: 297mm;
+                width: 210mm;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<button onclick="window.print();" class="no-print" style="margin:20px">Печать</button>
+
+<p><strong>Заказ:</strong> {{ order_info.order_name }}</p>
+<p><strong>Дата заказа:</strong> {{ order_info.order_date }}</p>
+
+<table>
+    <tr>
+        <th>Наименование</th>
+        <th>Количество</th>
+    </tr>
+{% for r in result %}
+    <tr>
+        <td>{{ r.product__product_name }}</td>
+        <td>{{ r.quantity }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<button onclick="window.print();" class="no-print" style="margin:20px">Печать</button>
+
+<script>
+window.print();
+</script>
+
+</body>
+</html>

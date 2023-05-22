@@ -8,6 +8,7 @@ from django.utils import timezone
 from reports.logic.inventory_report import inventory_report_result
 from reports.logic.pallet_only_report import pallet_only_report_result
 from reports.logic.pallet_report import pallet_report_result
+from reports.logic.print_order import print_order_result, order_info
 from reports.logic.report_func import get_filter_date, get_date_range, products_and_category, export_to_excel
 from warehouse.models import Product, Category, IncomingProduct, OrderProduct
 
@@ -98,7 +99,7 @@ def export_report_pallet(request):
 # End pallet report ====================================================================
 
 
-# Pallet only report =======================================================================
+# Pallet only report ===================================================================
 
 @login_required
 def pallet_only_report(request, export=False):
@@ -128,4 +129,24 @@ def pallet_only_report(request, export=False):
 def export_report_pallet_only(request):
     return pallet_only_report(request, True)
 
-# End pallet only report ====================================================================
+# End pallet only report ===============================================================
+
+
+# Print order ==========================================================================
+
+@login_required
+def print_order(request, object_id):
+    template = 'reports/print_order.html'
+    report_name = 'Печать заказа'
+
+    result = print_order_result(object_id)
+    order = order_info(object_id)
+
+    context = {
+        'report_name': report_name,
+        'order_info': order,
+        'result': result,
+    }
+    return render(request, template, context)
+
+# End print order ======================================================================

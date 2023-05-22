@@ -51,7 +51,17 @@
 {% endfor %}
 {% endblock %}
 
-{% block after_field_sets %}{% endblock %}
+{% block after_field_sets %}
+    <!--- Add section for print button--->
+    {% if object_id != None %}
+    <div class="submit-row">
+        <a href="/reports/print-order/{{ object_id }}" target="_blank">
+            <input type="button" value="Печать заказа">
+        </a>
+    </div>
+    {% endif %}
+    <!--- End section for print button --->
+{% endblock %}
 
 {% block inline_field_sets %}
 {% for inline_admin_formset in inline_admin_formsets %}

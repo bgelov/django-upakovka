@@ -2,7 +2,7 @@ from warehouse.models import OrderProduct, Order
 
 
 def print_order_result(object_id):
-    result = OrderProduct.objects.filter(order_id=object_id).select_related('product').values('product__product_name', 'quantity')
+    result = OrderProduct.objects.filter(order_id=object_id).select_related('product').values('product__barcode', 'product__product_name', 'quantity')
     return result
 
 def order_info(object_id):

@@ -31,11 +31,13 @@
 
 <table>
     <tr>
+        <th>Штрихкод</th>
         <th>Наименование</th>
         <th>Количество</th>
     </tr>
 {% for r in result %}
     <tr>
+        <td>{{ r.product__barcode }}</td>
         <td>{{ r.product__product_name }}</td>
         <td>{{ r.quantity }}</td>
     </tr>

@@ -2,6 +2,11 @@
 
 {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('УпаковкаРУ') }}{% endblock %}
 
+{% block extrahead %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/admin.css' %}">
+{% endblock %}
+
 {% block branding %}
 <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Управление хранением') }}</a></h1>
 {% endblock %}

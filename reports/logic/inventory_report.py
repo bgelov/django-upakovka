@@ -1,11 +1,6 @@
-from datetime import timezone
-
 import pandas as pd
-from django.db.models import Sum
-from django.shortcuts import render
 
 from reports.logic.report_func import get_order_products_sum, get_incoming_products_sum
-from warehouse.models import Product, OrderProduct, IncomingProduct
 
 
 def inventory_report_result(products, filter_date):
@@ -34,8 +29,8 @@ def inventory_report_result(products, filter_date):
             result = result.merge(order_products, left_on='id', right_on='product_id', how='left')
             result.drop('product_id', axis=1, inplace=True)
 
-        result['total_now_' + str(filter_date_col)] = (result['total_incoming'] - result['total_order']).astype('Int64')
-
         result.fillna(0, inplace=True)
+
+        result['total_now_' + str(filter_date_col)] = (result['total_incoming'] - result['total_order']).astype('Int64')
 
     return result

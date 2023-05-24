@@ -9,7 +9,7 @@ def inventory_report_result(products, filter_date):
     """
     products_count = products.count()
     result = pd.DataFrame(products)
-    filter_date_col = filter_date.strftime('%d/%m/%Y %H:%M:%S')
+    filter_date_col = filter_date.strftime('%d/%m/%Y')
 
     if products_count > 0:
 

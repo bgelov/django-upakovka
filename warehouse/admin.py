@@ -6,7 +6,7 @@ from import_export.admin import ImportExportModelAdmin
 class OrderProductInline(admin.TabularInline):
     model = OrderProduct
     extra = 3
-    # autocomplete_fields = ['product']
+    autocomplete_fields = ['product']
 
 class OrderInProductPage(admin.TabularInline):
     model = OrderProduct
@@ -24,7 +24,7 @@ class OrderInProductPage(admin.TabularInline):
 class IncomingProductInline(admin.TabularInline):
     model = IncomingProduct
     extra = 3
-
+    autocomplete_fields = ['product']
 
 class IncomingInProductPage(admin.TabularInline):
     model = IncomingProduct

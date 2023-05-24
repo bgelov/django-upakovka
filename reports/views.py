@@ -2,7 +2,6 @@
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render
-from django.db.models import Sum
 from django.utils import timezone
 
 from reports.logic.inventory_report import inventory_report_result
@@ -10,15 +9,6 @@ from reports.logic.pallet_only_report import pallet_only_report_result
 from reports.logic.pallet_report import pallet_report_result
 from reports.logic.print_order import print_order_result, order_info
 from reports.logic.report_func import get_filter_date, get_date_range, products_and_category, export_to_excel
-from warehouse.models import Product, Category, IncomingProduct, OrderProduct
-
-import numpy as np
-import pandas as pd
-
-# For pandas report export
-from io import BytesIO
-
-from django.http import HttpResponse
 
 
 # Index page =======================================================================

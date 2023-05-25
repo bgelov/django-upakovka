@@ -52,18 +52,19 @@
 {% endblock %}
 
 {% block after_field_sets %}
-    <!--- Add section for print button--->
-    {% if object_id != None %}
+    <!--- Add section for print button and counting result--->
     <div class="submit-row">
+        <span>Общее количество: <span id="resultFieldTop">0</span></span>
+    {% if object_id != None %}
         <a href="/reports/print-order/{{ object_id }}?print=false" target="_blank">
             <input type="button" value="Предпросмотр">
         </a>
         <a href="/reports/print-order/{{ object_id }}" target="_blank">
             <input type="button" value="Печать">
         </a>
-    </div>
     {% endif %}
-    <!--- End section for print button --->
+    </div>
+    <!--- End section for print button and counting result --->
 {% endblock %}
 
 {% block inline_field_sets %}
@@ -76,9 +77,9 @@
 
 {% block submit_buttons_bottom %}{% submit_row %}
 
-    <!--- Add section for print button--->
+    <!--- Add section for print button and counting result--->
     <div class="submit-row">
-        <span>Общее количество: <span id="resultField">0</span></span>
+        <span>Общее количество: <span id="resultFieldBottom">0</span></span>
     {% if object_id != None %}
         <a href="/reports/print-order/{{ object_id }}?print=false" target="_blank">
             <input type="button" value="Предпросмотр">
@@ -88,12 +89,13 @@
         </a>
     {% endif %}
     </div>
-    <!--- End section for print button --->
+    <!--- End section for print button and counting result --->
 
     <!--- Script for counting input sum ---->
     <script>
         let totalSum = 0;
-        const resultField = document.getElementById('resultField');
+        const resultFieldTop = document.getElementById('resultFieldTop');
+        const resultFieldBottom = document.getElementById('resultFieldBottom');
 
         // Функция для подсчета общей суммы
         function calculateTotalSum() {
@@ -112,7 +114,8 @@
           });
 
           // console.log(totalSum);
-          resultField.textContent = totalSum; // Обновление значения поля
+          resultFieldTop.textContent = totalSum; // Обновление значения поля
+          resultFieldBottom.textContent = totalSum; // Обновление значения поля
         }
 
         // Добавить обработчик события input для всех input с типом number

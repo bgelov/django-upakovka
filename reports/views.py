@@ -132,10 +132,14 @@ def print_order(request, object_id):
     result = print_order_result(object_id)
     order = order_info(object_id)
 
+    print_flag = request.GET.get('print', 'true')
+
     context = {
         'report_name': report_name,
         'order_info': order,
-        'result': result,
+        'result': result['order_table'],
+        'product_sum': result['product_sum']['quantity__sum'],
+        'print_flag': print_flag,
     }
     return render(request, template, context)
 

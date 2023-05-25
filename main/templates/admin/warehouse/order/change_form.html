@@ -55,8 +55,11 @@
     <!--- Add section for print button--->
     {% if object_id != None %}
     <div class="submit-row">
+        <a href="/reports/print-order/{{ object_id }}?print=false" target="_blank">
+            <input type="button" value="Предпросмотр">
+        </a>
         <a href="/reports/print-order/{{ object_id }}" target="_blank">
-            <input type="button" value="Печать заказа">
+            <input type="button" value="Печать">
         </a>
     </div>
     {% endif %}
@@ -74,14 +77,54 @@
 {% block submit_buttons_bottom %}{% submit_row %}
 
     <!--- Add section for print button--->
-    {% if object_id != None %}
     <div class="submit-row">
-        <a href="/reports/print-order/{{ object_id }}" target="_blank">
-            <input type="button" value="Печать заказа">
+        <span>Общее количество: <span id="resultField">0</span></span>
+    {% if object_id != None %}
+        <a href="/reports/print-order/{{ object_id }}?print=false" target="_blank">
+            <input type="button" value="Предпросмотр">
         </a>
-    </div>
+        <a href="/reports/print-order/{{ object_id }}" target="_blank">
+            <input type="button" value="Печать">
+        </a>
     {% endif %}
+    </div>
     <!--- End section for print button --->
+
+    <!--- Script for counting input sum ---->
+    <script>
+        let totalSum = 0;
+        const resultField = document.getElementById('resultField');
+
+        // Функция для подсчета общей суммы
+        function calculateTotalSum() {
+          totalSum = 0;
+
+          // Получить все input с типом number
+          const numberInputs = document.querySelectorAll('input[type="number"]');
+
+          // Пройтись по каждому input и добавить его значение к общей сумме
+          numberInputs.forEach(input => {
+            // Проверить, содержит ли id значение "id_orderproduct_set-"
+            if (input.id.includes("id_orderproduct_set-")) {
+              const value = parseFloat(input.value) || 0; // Преобразовать значение в число, если возможно
+              totalSum += value;
+            }
+          });
+
+          // console.log(totalSum);
+          resultField.textContent = totalSum; // Обновление значения поля
+        }
+
+        // Добавить обработчик события input для всех input с типом number
+        document.addEventListener('input', function(event) {
+          const target = event.target;
+          if (target.tagName === 'INPUT' && target.type === 'number') {
+            calculateTotalSum();
+          }
+        });
+        calculateTotalSum();
+    </script>
+    <!--- End script for counting input sum ---->
 
 {% endblock %}
 

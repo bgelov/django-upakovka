@@ -42,13 +42,20 @@
         <td>{{ r.quantity }}</td>
     </tr>
 {% endfor %}
+    <tr style="border-top: 3px solid black">
+        <td colspan="2" style="text-align:end">Всего:</td>
+        <td>{{ product_sum }}</td>
+    </tr>
 </table>
 
 <button onclick="window.print();" class="no-print" style="margin:20px">Печать</button>
 
+
+{% if print_flag != 'false' %}
 <script>
 window.print();
 </script>
+{% endif %}
 
 </body>
 </html>

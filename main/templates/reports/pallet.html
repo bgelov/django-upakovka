@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<form method="POST" action="{% url 'reports:pallet_report' %}">
+<form method="POST" action="">
     {% csrf_token %}
     <label for="filter_date_start">с:</label>
     <input type="date" name="filter_date_start" id="filter_date_start">

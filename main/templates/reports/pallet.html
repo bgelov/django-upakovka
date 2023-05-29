@@ -3,13 +3,13 @@
 {% block title %} {{ report_name }} {% endblock title %}
 
 {% block content %}
-
 <form method="POST" action="">
     {% csrf_token %}
     <label for="filter_date_start">с:</label>
     <input type="date" name="filter_date_start" id="filter_date_start">
     <label for="filter_date_end">по:</label>
     <input type="date" name="filter_date_end" id="filter_date_end">
+
     <button type="submit">Показать</button>
 </form>
 <br>

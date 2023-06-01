@@ -17,9 +17,33 @@
 <p><strong>Дата начала:</strong> {{ filter_date_start }}. <strong>Конечная дата:</strong> {{ filter_date_end }}.</p>
 <br>
 {% if products_count > 0 %}
-<p><a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a></p>
+
+    {% if filter_date_start_input and filter_date_end_input %}
+        <form method="POST" action="../{{ export_link }}/">
+            {% csrf_token %}
+            <input type="hidden" name="filter_date_start" value="{{ filter_date_start_input }}">
+            <input type="hidden" name="filter_date_end" value="{{ filter_date_end_input }}">
+            <button type="submit">Экспорт отчёта в xlsx</button>
+        </form>
+    {% else %}
+        <p>Чтобы экспортировать отчёт, для начала выберите даты и нажмите кнопку Показать</p>
+    {% endif %}
+        <br>
+
     {{ df | safe }}
-<p><a href="../{{ export_link }}/">Экспорт отчёта в xlsx</a></p>
+
+        <br>
+    {% if filter_date_start_input and filter_date_end_input %}
+        <form method="POST" action="../{{ export_link }}/">
+            {% csrf_token %}
+            <input type="hidden" name="filter_date_start" value="{{ filter_date_start_input }}">
+            <input type="hidden" name="filter_date_end" value="{{ filter_date_end_input }}">
+            <button type="submit">Экспорт отчёта в xlsx</button>
+        </form>
+    {% else %}
+        <p>Чтобы экспортировать отчёт, для начала выберите даты и нажмите кнопку Показать</p>
+    {% endif %}
+
 {% elif products_count == 0 %}
     <p>Набор данных пустой. Количество продукции равно 0.</p>
 {% else %}

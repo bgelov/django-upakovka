@@ -76,6 +76,8 @@ def pallet_report(request, export=False):
         'products_count': products.count(),
         'filter_date_start': filter_date_start,
         'filter_date_end': filter_date_end,
+        'filter_date_start_input': request.POST.get('filter_date_start'),
+        'filter_date_end_input': request.POST.get('filter_date_end'),
         'export_link': 'export-report-pallet',
     }
     return render(request, template, context)
@@ -110,6 +112,8 @@ def pallet_only_report(request, export=False):
         'products_count': products.count(),
         'filter_date_start': filter_date_start,
         'filter_date_end': filter_date_end,
+        'filter_date_start_input': request.POST.get('filter_date_start'),
+        'filter_date_end_input': request.POST.get('filter_date_end'),
         'export_link': 'export-report-pallet-only',
     }
     return render(request, template, context)

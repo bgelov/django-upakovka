@@ -9,11 +9,16 @@ from django.utils import timezone
 from warehouse.models import Product, OrderProduct, IncomingProduct
 
 
+def convert_date_from_form_to_y_m_d(request):
+    filter_date_start_input = datetime.strptime(request.POST.get('filter_date_start'), '%Y-%m-%d')
+    filter_date_end_input = datetime.strptime(request.POST.get('filter_date_end'), '%Y-%m-%d')
+    return [filter_date_start_input, filter_date_end_input]
+
+
 def get_filter_date(request):
     if request.method == 'POST' and request.POST.get('filter_date_start') != '' and request.POST.get(
             'filter_date_end') != '':
-        filter_date_start = datetime.strptime(request.POST.get('filter_date_start'), '%Y-%m-%d')
-        filter_date_end = datetime.strptime(request.POST.get('filter_date_end'), '%Y-%m-%d')
+        filter_date_start, filter_date_end = convert_date_from_form_to_y_m_d(request)
 
     else:
         filter_date_end = datetime.now()

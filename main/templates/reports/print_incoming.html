@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ incoming_info.incoming_name }} от {{ incoming_info.incoming_date }}</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding: 7px;
+        }
+        * { color: black; background: white; }
+
+        @media print {
+            html, body{
+                height: 297mm;
+                width: 210mm;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<button onclick="window.print();" class="no-print" style="margin:20px">Печать</button>
+
+<p><strong>Приход:</strong> {{ incoming_info.incoming_name }}</p>
+<p><strong>Дата прихода:</strong> {{ incoming_info.incoming_date }}</p>
+
+<table>
+    <tr>
+        <th>Штрихкод</th>
+        <th>Наименование</th>
+        <th>Количество</th>
+    </tr>
+{% for r in result %}
+    <tr>
+        <td>{{ r.product__barcode }}</td>
+        <td>{{ r.product__product_name }}</td>
+        <td>{{ r.quantity }}</td>
+    </tr>
+{% endfor %}
+    <tr style="border-top: 3px solid black">
+        <td colspan="2" style="text-align:end">Всего:</td>
+        <td>{{ product_sum }}</td>
+    </tr>
+</table>
+
+<button onclick="window.print();" class="no-print" style="margin:20px">Печать</button>
+
+
+{% if print_flag != 'false' %}
+<script>
+window.print();
+</script>
+{% endif %}
+
+</body>
+</html>

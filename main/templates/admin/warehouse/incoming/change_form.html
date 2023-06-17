@@ -52,11 +52,19 @@
 {% endblock %}
 
 {% block after_field_sets %}
-    <!--- Add section for counting result--->
+    <!--- Add section for print button and counting result--->
     <div class="submit-row">
         <span>Общее количество: <span id="resultFieldTop">0</span></span>
+    {% if object_id != None %}
+        <a href="/reports/print-incoming/{{ object_id }}?print=false" target="_blank">
+            <input type="button" value="Предпросмотр">
+        </a>
+        <a href="/reports/print-incoming/{{ object_id }}" target="_blank">
+            <input type="button" value="Печать">
+        </a>
+    {% endif %}
     </div>
-    <!--- End section for counting result --->
+    <!--- End section for print button and counting result --->
 {% endblock %}
 
 {% block inline_field_sets %}
@@ -69,11 +77,19 @@
 
 {% block submit_buttons_bottom %}{% submit_row %}
 
-    <!--- Add section for counting result--->
+    <!--- Add section for print button and counting result--->
     <div class="submit-row">
         <span>Общее количество: <span id="resultFieldBottom">0</span></span>
+    {% if object_id != None %}
+        <a href="/reports/print-incoming/{{ object_id }}?print=false" target="_blank">
+            <input type="button" value="Предпросмотр">
+        </a>
+        <a href="/reports/print-incoming/{{ object_id }}" target="_blank">
+            <input type="button" value="Печать">
+        </a>
+    {% endif %}
     </div>
-    <!--- End section for counting result --->
+    <!--- End section for print button and counting result --->
 
     <!--- Script for counting input sum ---->
     <script>

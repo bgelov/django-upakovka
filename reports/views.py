@@ -7,6 +7,7 @@ from django.utils import timezone
 from reports.logic.inventory_report import inventory_report_result
 from reports.logic.pallet_only_report import pallet_only_report_result
 from reports.logic.pallet_report import pallet_report_result
+from reports.logic.print_incoming import print_incoming_result, incoming_info
 from reports.logic.print_order import print_order_result, order_info
 from reports.logic.report_func import get_filter_date, get_date_range, products_and_category, export_to_excel
 
@@ -20,7 +21,7 @@ def index_report(request):
 
 # End index page ===================================================================
 
-# Inventory report =======================================================================
+# Inventory report =================================================================
 
 @login_required
 def inventory_report(request, export=False):
@@ -126,7 +127,7 @@ def export_report_pallet_only(request):
 # End pallet only report ===============================================================
 
 
-# Print order ==========================================================================
+# Print order and incoming =============================================================
 
 @login_required
 def print_order(request, object_id):
@@ -142,6 +143,26 @@ def print_order(request, object_id):
         'report_name': report_name,
         'order_info': order,
         'result': result['order_table'],
+        'product_sum': result['product_sum']['quantity__sum'],
+        'print_flag': print_flag,
+    }
+    return render(request, template, context)
+
+
+@login_required
+def print_incoming(request, object_id):
+    template = 'reports/print_incoming.html'
+    report_name = 'Печать прихода'
+
+    result = print_incoming_result(object_id)
+    incoming = incoming_info(object_id)
+
+    print_flag = request.GET.get('print', 'true')
+
+    context = {
+        'report_name': report_name,
+        'incoming_info': incoming,
+        'result': result['incoming_table'],
         'product_sum': result['product_sum']['quantity__sum'],
         'print_flag': print_flag,
     }

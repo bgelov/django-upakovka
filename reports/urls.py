@@ -13,6 +13,7 @@ urlpatterns = [
     path('export-report-inventory/', export_report_inventory, name='export_report_inventory'),
     path('export-report-pallet/', export_report_pallet, name='export_report_pallet'),
     path('export-report-pallet-only/', export_report_pallet_only, name='export_report_pallet_only'),
+    path('print-incoming/<int:object_id>', print_incoming, name='print_incoming'),
     path('print-order/<int:object_id>', print_order, name='print_order'),
 ]
 

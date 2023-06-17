@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import index_report, inventory_report, pallet_report, pallet_only_report, export_report_inventory, \
     export_report_pallet, \
-    export_report_pallet_only, print_order
+    export_report_pallet_only, print_order, print_incoming, export_product_incoming_and_order, product_incoming_and_order
 
 app_name = 'reports'
 urlpatterns = [
